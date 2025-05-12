@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Your BirthDayy Surprise!!!</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@400;700&display=swap');
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: linear-gradient(135deg, #ffe6f0 0%, #fff8fb 100%);
+    font-family: 'Roboto', sans-serif;
+    color: #9c1c48;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+    text-align: center;
+    position: relative;
+  }
+
+  .heart {
+    position: absolute;
+    background: url('https://example.com/heart.png') no-repeat center center;
+    background-size: contain;
+    animation: float 6s ease-in infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+  }
+
+  nav.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 70px;
+    background: #9c1c48;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    box-shadow: 2px 0 8px rgba(156, 28, 72, 0.3);
+    z-index: 9999;
+  }
+  nav.sidebar a {
+    color: #fff8fb;
+    font-weight: 700;
+    font-size: 1.3rem;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    margin: 20px 0;
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    transition: color 0.3s ease;
+  }
+  nav.sidebar a:hover,
+  nav.sidebar a.active {
+    color: #ffd1eb;
+  }
+
+  main.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    margin-left: 70px;
+  }
+
+  .container {
+    width: 100%;
+    max-height: 90vh;
+    background: rgba(255, 244, 248, 0.95);
+    border-radius: 30px;
+    padding: 50px 40px 60px 40px;
+    box-shadow: 0 12px 40px rgba(156, 28, 72, 0.3);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    z-index: 1;
+  }
+
+  h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3.5rem;
+    margin-bottom: 1.4em;
+    color: #7a0f36;
+  }
+
+  .video-container {
+    width: 100%;
+    height: 315px;
+    margin-top: 1.5em;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(156, 28, 72, 0.35);
+  }
+
+  p {
+    margin-top: 1.8em;
+    font-size: 1.15rem;
+    line-height: 1.65;
+    color: #6e143c;
+    text-align: left;
+  }
+
+  p + p {
+    margin-top: 1.2em;
+  }
+
+  a.back-btn {
+    display: inline-block;
+    margin-top: 2.8em;
+    background: #9c1c48;
+    color: #fff8fb;
+    padding: 13px 32px;
+    border-radius: 45px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    font-weight: 700;
+    box-shadow: 0 6px 14px rgba(156, 28, 72, 0.5);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  a.back-btn:hover {
+    background: #d72a6e;
+    transform: scale(1.06);
+  }
+  a.back-btn:active {
+    transform: scale(0.95);
+  }
+
+  @media (max-width: 420px) {
+    h1 {
+      font-size: 2.6rem;
+      margin-bottom: 1.2em;
+    }
+    p {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 100%;
+      padding: 25px 20px 35px 20px;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- Background Audio -->
+<audio id="bg-audio" autoplay loop>
+  <source src="ScreenRecording_05-13-2025 00-54-26_1 2.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<nav class="sidebar" aria-label="Primary navigation">
+  <a href="front.html">GREET</a>
+  <a href="web.html">SURPRISE</a>
+  <a href="gallery.html" class="active">GALLERY</a>
+</nav>
+
+<main class="content">
+  <div class="container">
+    <h1>For The most amazing person ever ❤️</h1>
+    <p>Aashi, you are genuinely one of the most amazing and beautiful people I’ve ever had the chance to know.</p>
+    <p>You carry such a rare mix of intelligence, kindness, strength, and charm that makes you stand out in the best way. You’re warm, genuine, and so much stronger than you even realize. And you’re beautiful — in every way that matters.</p>
+    <p>I know you sometimes doubt yourself. You question whether you’re doing enough or being enough. But from where I stand, there's no question at all — you are more than enough. You're doing more than you see, and you're so incredibly valued.</p>
+    <p>It's funny how some people don’t realize what makes them special. The little things — your smile, your way of thinking, how you care — they all add up to something unforgettable.</p>
+    <p>And like a certain song reminds me, sometimes not knowing how beautiful you are is exactly what makes you even more so.</p>
+    <p>Even from different cities, even without meeting in person — you’ve come to mean more to me than words can say.</p>
+
+    <div class="video-container">
+      <video width="100%" height="100%" controls>
+        <source src="ScreenRecording_05-13-2025 00-11-49_1.mov" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <a href="gallery.html" class="back-btn">To Gallery</a>
+  </div>
+</main>
+
+<script>
+  // Floating hearts generation
+  const heartsCount = 12;
+  const body = document.body;
+
+  function random(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  for (let i = 0; i < heartsCount; i++) {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = random(10, 100) + 'vw';
+    heart.style.animationDuration = random(6, 12) + 's';
+    heart.style.animationDelay = random(0, 12) + 's';
+    heart.style.width = random(15, 30) + 'px';
+    heart.style.height = (parseInt(heart.style.width) * 0.9) + 'px';
+    heart.style.opacity = Math.random() * 0.8 + 0.2;
+    body.appendChild(heart);
+  }
+
+  // Pause/resume background music on video play
+  const bgAudio = document.getElementById("bg-audio");
+  const video = document.querySelector("video");
+
+  video.addEventListener("play", () => {
+    if (!bgAudio.paused) bgAudio.pause();
+  });
+
+  video.addEventListener("pause", () => {
+    if (bgAudio.paused) bgAudio.play();
+  });
+</script>
+
+</body>
+</html>

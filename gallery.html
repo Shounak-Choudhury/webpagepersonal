@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>BirthDay Photo Gallery</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@400;700&display=swap');
+
+  /* Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    height: 100%;
+    background: linear-gradient(135deg, #ffe0e6 0%, #fff6f9 100%);
+    font-family: 'Roboto', sans-serif;
+    color: #a4003a;
+    overflow-x: hidden;
+  }
+
+  body {
+    display: flex;
+    min-height: 100vh;
+    margin: 0;
+  }
+
+  /* Sidebar */
+  nav.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 70px;
+    background: #a4003a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    box-shadow: 2px 0 8px rgba(164,0,58,0.3);
+    z-index: 999;
+  }
+  nav.sidebar a {
+    color: #fff7fa;
+    font-weight: 700;
+    font-size: 1.3rem;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    margin: 20px 0;
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    transition: color 0.3s ease;
+  }
+  nav.sidebar a:hover,
+  nav.sidebar a.active {
+    color: #ffd1eb;
+  }
+
+  /* Main content area */
+  main.content {
+    margin-left: 70px;
+    flex: 1;
+    padding: 40px 30px 50px 40px;
+    overflow-y: auto;
+    max-height: 100vh;
+    position: relative;
+    z-index: 2;
+  }
+
+  .container {
+    max-width: 700px; /* Increased width for better alignment */
+    margin: 0 auto;
+    background: rgba(255, 244, 247, 0.98); /* Slightly more opaque background */
+    border-radius: 25px; /* More rounded corners */
+    padding: 40px 35px 50px 35px; /* Increased padding */
+    box-shadow: 0 10px 40px rgba(164, 0, 58, 0.4); /* Softer shadow */
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3.4rem;
+    margin-bottom: 1.5em;
+    color: #7a0030;
+  }
+
+  .description {
+    font-size: 1.3rem; /* Slightly larger font size */
+    line-height: 1.8; /* Increased line height */
+    color: #6a002e; /* Softer color for text */
+    margin-bottom: 2.5em; /* Increased margin for spacing */
+    text-align: center;
+    font-weight: 400; /* Lighter font weight */
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Slightly larger minimum size */
+    gap: 24px; /* Increased space between images */
+    margin-bottom: 2em;
+    justify-items: center; /* Center images in grid */
+  }
+
+  .gallery img {
+    width: 220px; /* Increased width */
+    height: 220px; /* Increased height */
+    border-radius: 20px; /* Slightly larger border radius */
+    box-shadow: 0 8px 30px rgba(164, 0, 58, 0.5); /* Softer shadow */
+    object-fit: cover; /* Ensures images fit well */
+    cursor: pointer;
+    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smoother transition */
+  }
+  .gallery img:hover {
+    transform: scale(1.1); /* Slightly larger scale */
+    box-shadow: 0 12px 40px rgba(215, 20, 89, 0.7); /* More pronounced shadow */
+  }
+
+  a.back-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #a4003a, #db1459); /* Gradient background */
+    color: #fff; /* White text for contrast */
+    padding: 15px 40px; /* Adjusted padding */
+    border-radius: 50px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    font-weight: 700;
+    box-shadow: 0 8px 20px rgba(164, 0, 58, 0.6);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Added transition for shadow */
+  }
+  a.back-btn:hover {
+    background: linear-gradient(135deg, #db1459, #a4003a); /* Reverse gradient on hover */
+    transform: scale(1.05); /* Slightly larger scale */
+    box-shadow: 0 12px 30px rgba(215, 20, 89, 0.8); /* More pronounced shadow */
+  }
+  a.back-btn:active {
+    transform: scale(0.95);
+  }
+
+  /* Floating hearts container */
+  #hearts-container {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 70px; /* start after sidebar */
+    width: calc(100% - 70px);
+    height: 100vh;
+    overflow: visible;
+    z-index: 1;
+  }
+
+  /* Floating hearts */
+  .heart {
+    position: absolute;
+    bottom: -45px;
+    width: 20px;
+    height: 18px;
+    background-color: #db1459;
+    transform: rotate(-45deg);
+    animation-name: floatUp;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    opacity: 0.7;
+  }
+  .heart::before,
+  .heart::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 18px;
+    background-color: #db1459;
+    border-radius: 50%;
+  }
+  .heart::before {
+    top: -10px;
+    left: 0;
+  }
+  .heart::after {
+    top: 0;
+    left: 10px;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(0) rotate(-45deg);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateY(-600px) rotate(-45deg);
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 700px) {
+    nav.sidebar {
+      width: 50px;
+      padding: 15px 0;
+    }
+    nav.sidebar a {
+      font-size: 1rem;
+      margin: 15px 0;
+      letter-spacing: 0.1em;
+    }
+    main.content {
+      margin-left: 50px;
+      padding: 30px 20px 40px 25px;
+    }
+    .container {
+      max-width: 100%;
+      padding: 30px 25px 40px 25px;
+    }
+    h1 {
+      font-size: 2.8rem;
+    }
+    .description {
+      font-size: 1.1rem;
+      margin-bottom: 1.6em;
+    }
+    .gallery {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Adjust for smaller screens */
+      gap: 16px; /* Adjust gap */
+    }
+    a.back-btn {
+      font-size: 1rem;
+      padding: 13px 28px;
+    }
+    #hearts-container {
+      left: 50px;
+      width: calc(100% - 50px);
+    }
+  }
+
+  @media (max-width: 420px) {
+    nav.sidebar {
+      display: none;
+    }
+    main.content {
+      margin-left: 0;
+      padding: 20px 15px 30px 15px;
+    }
+    #hearts-container {
+        left: 0;
+        width: 100%;
+    }
+  }
+</style>
+</head>
+<body>
+  <nav class="sidebar" aria-label="Primary navigation">
+    <a href="front.html" aria-current="false" title="Go to Greeting page" tabindex="0">GREET</a>
+    <a href="web.html" aria-current="false" title="Go to Surprise page" tabindex="0">SURPRISE</a>
+    <a href="gallery.html" class="active" aria-current="page" title="You are on Gallery page" tabindex="0">GALLERY</a>
+  </nav>
+  <main class="content">
+    <div class="container" role="main" aria-label="Valentine's Day Photo Gallery with Floating Hearts and Navigation">
+      <h1>All about you ❤️</h1>
+      <p class="description" tabindex="0">
+        Hey Aashi, I just wanted to remind you of something that I hope you never forget — You are genuinely one of the most amazing and beautiful people I’ve ever had the chance to know. There’s something so rare about you — a mix of intelligence, kindness, strength, and this effortless charm that honestly makes you stand out in the best way. You're warm, you're genuine, and you carry a quiet strength even when things get tough. And on top of that, you're just… naturally beautiful — in both how you look and who you are. Sometimes, I know you doubt yourself. You question your worth or whether you're doing enough. But from where I see you, there’s no doubt at all. You're doing so much more than you realize, and you’re far more incredible than you give yourself credit for.
+        It’s funny how people don’t always see what makes them so special — how the little things, the smile, the spark in their eyes, the way they care, all come together in a way that’s truly unforgettable. And just like a certain song says, maybe you don’t know you’re beautiful — and that’s what makes you truly special. Never stop being the wonderful person you are.
+      </p>
+      <div class="gallery" aria-live="polite">
+        <img src="e6ac87de-5d74-4c3c-9909-38abdfc6243f.JPG" alt="Couple holding hands" />
+        <img src="IMG_1600.jpg" alt="Romantic roses bouquet" />
+        <img src="2b6ed50f-4101-4109-a560-c0a4d045a9cc.JPG" alt="Sunset couple silhouette" />
+        <img src="IMG_1597.jpg" alt="Heart shaped lights" />
+        <img src="IMG_1598.jpg" alt="Valentine's Day gift box" />
+        <img src="IMG_1599.jpg" alt="Champagne glasses clink" />
+      </div>
+      <p class="description" tabindex="0">
+        The above are just some of the best pictures I have seen of yours but trust me you're just always effortlessly beautiful.
+      </p>
+      <a href="front.html" class="back-btn" aria-label="Go back to main Valentine's Day page">Back to Greeting</a>
+    </div>
+  </main>
+
+  <div id="hearts-container"></div>
+
+  <!-- Audio Element -->
+  <audio id="background-music" autoplay loop>
+    <source src="ScreenRecording_05-12-2025 04-01-03_1.mp3" type="audio/mpeg"> <!-- Replace with your audio file -->
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    // Floating hearts generation inside #hearts-container
+    const heartsCount = 20;
+    const heartsContainer = document.getElementById('hearts-container');
+    const minLeft = 10;
+    const maxLeft = window.innerWidth - 80; // consider sidebar width + remainder
+
+    function random(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    for(let i=0; i < heartsCount; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = random(minLeft, maxLeft) + 'px';
+      heart.style.animationDuration = random(6, 14) + 's';
+      heart.style.animationDelay = random(0, 14) + 's';
+      const size = random(15, 28);
+      heart.style.width = size + 'px';
+      heart.style.height = (size * 0.9) + 'px';
+      heart.style.opacity = Math.random() * 0.7 + 0.3;
+      heartsContainer.appendChild(heart);
+    }
+  </script>
+</body>
+</html>
