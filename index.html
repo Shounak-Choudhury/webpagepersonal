@@ -1,10 +1,233 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Site</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Happy BirthDayyy Aashi!!!</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@400;700&display=swap');
+
+  /* Reset and base */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: linear-gradient(135deg, #ffccd5 0%, #fff0f5 100%);
+    font-family: 'Roboto', sans-serif;
+    color: #b3002d;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+  }
+
+  /* Sidebar */
+  nav.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 70px;
+    background: #a4003a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    box-shadow: 2px 0 8px rgba(164,0,58,0.3);
+    z-index: 9999;
+  }
+  nav.sidebar a {
+    color: #fff7fa;
+    font-weight: 700;
+    font-size: 1.3rem;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    margin: 20px 0;
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    transition: color 0.3s ease;
+  }
+  nav.sidebar a:hover,
+  nav.sidebar a.active {
+    color: #ffd1eb;
+  }
+
+  .container {
+    max-width: 350px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 20px;
+    padding: 30px 25px;
+    box-shadow: 0 8px 20px rgba(179,0,45,0.3);
+    position: relative;
+    z-index: 1;
+  }
+
+  h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3.8rem;
+    margin-bottom: 0.2em;
+  }
+
+  p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin-bottom: 1.6em;
+    color: #80002c;
+  }
+
+  button {
+    background: #b3002d;
+    color: #fff0f5;
+    border: none;
+    padding: 13px 30px;
+    font-size: 1.1rem;
+    border-radius: 40px;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 0 6px 12px rgba(179,0,45,0.5);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+  }
+  button:hover {
+    background: #e60048;
+    transform: scale(1.05);
+  }
+  button:active {
+    transform: scale(0.95);
+  }
+
+  /* Heart animations */
+  .heart {
+    position: fixed;
+    bottom: -50px;
+    width: 20px;
+    height: 18px;
+    background-color: #e60048;
+    transform: rotate(-45deg);
+    animation-name: floatUp;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+  .heart::before,
+  .heart::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 18px;
+    background-color: #e60048;
+    border-radius: 50%;
+  }
+  .heart::before {
+    top: -10px;
+    left: 0;
+  }
+  .heart::after {
+    top: 0;
+    left: 10px;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(0) rotate(-45deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-600px) rotate(-45deg);
+      opacity: 0;
+    }
+  }
+
+  /* Confetti styles */
+  .confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #ffcc00;
+    opacity: 0.8;
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(100vh);
+    }
+  }
+
+  @media (max-width: 400px) {
+    h1 {
+      font-size: 3rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+    .container {
+      padding: 25px 20px;
+    }
+  }
+  
+</style>
 </head>
 <body>
-  <h1>Hello, World!</h1>
+    <nav class="sidebar" aria-label="Primary navigation">
+        <a href="front.html" aria-current="false" title="Go to Greeting page" tabindex="0">GREET</a>
+        <a href="web.html" aria-current="false" title="Go to Surprise page" tabindex="0">SURPRISE</a>
+        <a href="gallery.html" class="active" aria-current="page" title="You are on Gallery page" tabindex="0">GALLERY</a>
+    </nav>
+    <main class="content">
+        <div class="container" role="main" aria-label="Valentine's Day Greeting">
+            <h1>Happy BirthDayy Aashi!!!❤️</h1>
+            <p>To one of the best people I have ever known,<br />I wish you a really amazing Birthday. I genuinely hope you have a great day and a great year ahead. May all your Dreams come true, and may you attain all the happiness you truly deserve. I cherish you more than words can say.</p>
+            <a href="web.html" role="button" class="button" id="surpriseBtn" aria-label="Open surprise page">Click for a Surprise!</a>
+        </div>
+    </main>
+
+    <audio id="backgroundMusic" src="happy-birthday-334876.mp3" autoplay loop></audio>
+
+    <script>
+        // Floating hearts generation
+        const heartsCount = 12;
+        const body = document.body;
+
+        function random(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        for(let i=0; i < heartsCount; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = random(10, 340) + 'px';
+            heart.style.animationDuration = random(6, 12) + 's';
+            heart.style.animationDelay = random(0, 12) + 's';
+            heart.style.width = random(15, 30) + 'px';
+            heart.style.height = (parseInt(heart.style.width) * 0.9) + 'px';
+            heart.style.opacity = Math.random() * 0.8 + 0.2;
+            body.appendChild(heart);
+        }
+
+        // Confetti generation
+        const confettiCount = 100;
+
+        for(let i = 0; i < confettiCount; i++) {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = random(0, window.innerWidth) + 'px';
+            confetti.style.backgroundColor = `hsl(${random(0, 360)}, 100%, 50%)`;
+            confetti.style.animationDuration = random(2, 5) + 's';
+            confetti.style.animationDelay = random(0, 5) + 's';
+            confetti.style.top = '0px'; // Start from the top
+            body.appendChild(confetti);
+        }
+    </script>
 </body>
 </html>
 
